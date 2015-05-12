@@ -1,0 +1,16 @@
+{
+  "name": "purescript-spec-quickcheck",
+  "version": "0.1.0",
+  "ignore": [
+    "**/.*",
+    "bower_components",
+    "tests",
+    "externs",
+    "tmp",
+    "output"
+  ],
+  "dependencies": {
+    "purescript-spec": "0.3.0",
+    "purescript-quickcheck": "~0.5.2"
+  }
+}
