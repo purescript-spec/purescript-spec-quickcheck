@@ -28,6 +28,10 @@ main = runNode do
       quickCheck \n -> (n * 2) /== n
 ```
 
+## API
+
+See [API](API.md).
+
 ## Contribute
 
 If you have any issues or possible improvements please file them as
