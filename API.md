@@ -5,7 +5,7 @@
 #### `quickCheck`
 
 ``` purescript
-quickCheck :: forall r p. (QC.Testable p) => p -> QC.QC Unit
+quickCheck :: forall r p e. (QC.Testable p) => p -> Aff (random :: Random | e) Unit
 ```
 
 Runs a Testable with a random seed and 100 inputs.
@@ -13,7 +13,7 @@ Runs a Testable with a random seed and 100 inputs.
 #### `quickCheck'`
 
 ``` purescript
-quickCheck' :: forall r p. (QC.Testable p) => Number -> p -> QC.QC Unit
+quickCheck' :: forall r p e. (QC.Testable p) => Number -> p -> Aff (random :: Random | e) Unit
 ```
 
 Runs a Testable with a random seed and the given number of inputs.
@@ -21,7 +21,7 @@ Runs a Testable with a random seed and the given number of inputs.
 #### `quickCheckWithSeed`
 
 ``` purescript
-quickCheckWithSeed :: forall r p. (QC.Testable p) => Number -> Number -> p -> QC.QC Unit
+quickCheckWithSeed :: forall r p e. (QC.Testable p) => Number -> Number -> p -> Aff e Unit
 ```
 
 Runs a Testable with a given seed and number of inputs.

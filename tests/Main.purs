@@ -12,4 +12,4 @@ main = runNode do
     it "works" $
       quickCheck \n -> (n * 2 / 2) === n
     it "works again" $
-      quickCheck \n -> (n * 2) /== n
+      quickCheck \n -> ((n + 1) * 2) /== n
