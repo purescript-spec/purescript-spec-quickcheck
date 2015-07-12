@@ -1,12 +1,13 @@
-module Main where
+module Test.Main where
 
-import Data.Array
-import Test.QuickCheck ((===), (/==))
-import Test.Spec (describe, pending, it)
-import Test.Spec.Node
-import Test.Spec.Assertions
-import Test.Spec.Reporter.Console
-import Test.Spec.QuickCheck
+import Prelude
+
+import Test.Spec                  (describe, it, pending)
+import Test.Spec.Node             (runNode)
+import Test.Spec.Reporter.Console (consoleReporter)
+import Test.QuickCheck            ((===), (/==))
+
+import Test.Spec.QuickCheck       (quickCheck)
 
 main = runNode [consoleReporter] do
   describe "Math" do
