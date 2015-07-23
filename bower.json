@@ -13,6 +13,6 @@
     "purescript-aff": "~0.11.0",
     "purescript-random": "~0.2.0",
     "purescript-quickcheck": "~0.6.0",
-    "purescript-spec": "https://github.com/DavidHarrison/purescript-spec.git#12ee764"
+    "purescript-spec": "https://github.com/owickstrom/purescript-spec.git#v0.6.0"
   }
 }
