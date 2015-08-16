@@ -6,14 +6,16 @@ module Test.Spec.QuickCheck (
 
 import Prelude
 
-import Control.Monad.Aff           (Aff(), makeAff)
+import Control.Monad.Aff           (Aff())
 import Control.Monad.Eff.Exception (error)
+import Control.Monad.Eff.Class     (liftEff)
 import Control.Monad.Eff.Random    (RANDOM(), randomInt)
 import Control.Monad.Error.Class   (throwError)
 import Data.Foldable               (intercalate)
 import Data.List                   (mapMaybe, length)
 import Data.Maybe                  (Maybe(..))
 import qualified Test.QuickCheck   as QC
+import Test.QuickCheck.LCG         (Seed(), randomSeed)
 
 -- | Runs a Testable with a random seed and 100 inputs.
 quickCheck :: forall r p e.
@@ -29,7 +31,7 @@ quickCheck' :: forall r p e.
                p ->
                Aff (random :: RANDOM | e) Unit
 quickCheck' n prop = do
-  seed <- makeAff \_ cont -> randomInt bottom top >>= cont
+  seed <- liftEff randomSeed
   quickCheckPure seed n prop
 
 getErrorMessage :: QC.Result -> Maybe String
@@ -39,7 +41,7 @@ getErrorMessage _ = Nothing
 -- | Runs a Testable with a given seed and number of inputs.
 quickCheckPure :: forall r p e.
                   (QC.Testable p) =>
-                  Int ->
+                  Seed ->
                   Int ->
                   p ->
                   Aff e Unit
