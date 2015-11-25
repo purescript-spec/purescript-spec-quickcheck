@@ -2,13 +2,17 @@ module Test.Main where
 
 import Prelude
 
-import Test.Spec                  (describe, it, pending)
-import Test.Spec.Runner           (run)
+import Control.Monad.Eff          (Eff())
+import Control.Monad.Eff.Console  (CONSOLE())
+import Control.Monad.Eff.Random   (RANDOM())
+import Test.Spec                  (describe, it)
+import Test.Spec.Runner           (Process(), run)
 import Test.Spec.Reporter.Console (consoleReporter)
 import Test.QuickCheck            ((===), (/==))
 
 import Test.Spec.QuickCheck       (quickCheck)
 
+main :: forall e. Eff (random :: RANDOM, console :: CONSOLE, process :: Process | e) Unit
 main = run [consoleReporter] do
   describe "Math" do
     it "works" $

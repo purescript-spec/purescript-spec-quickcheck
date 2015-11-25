@@ -9,7 +9,7 @@ import Prelude
 import Control.Monad.Aff           (Aff())
 import Control.Monad.Eff.Exception (error)
 import Control.Monad.Eff.Class     (liftEff)
-import Control.Monad.Eff.Random    (RANDOM(), randomInt)
+import Control.Monad.Eff.Random    (RANDOM())
 import Control.Monad.Error.Class   (throwError)
 import Data.Foldable               (intercalate)
 import Data.List                   (mapMaybe, length)
@@ -18,14 +18,14 @@ import qualified Test.QuickCheck   as QC
 import Test.QuickCheck.LCG         (Seed(), randomSeed)
 
 -- | Runs a Testable with a random seed and 100 inputs.
-quickCheck :: forall r p e.
+quickCheck :: forall p e.
               (QC.Testable p) =>
               p ->
               Aff (random :: RANDOM | e) Unit
 quickCheck = quickCheck' 100
 
 -- | Runs a Testable with a random seed and the given number of inputs.
-quickCheck' :: forall r p e.
+quickCheck' :: forall p e.
                (QC.Testable p) =>
                Int ->
                p ->
@@ -39,7 +39,7 @@ getErrorMessage (QC.Failed msg) = Just msg
 getErrorMessage _ = Nothing
 
 -- | Runs a Testable with a given seed and number of inputs.
-quickCheckPure :: forall r p e.
+quickCheckPure :: forall p e.
                   (QC.Testable p) =>
                   Seed ->
                   Int ->
