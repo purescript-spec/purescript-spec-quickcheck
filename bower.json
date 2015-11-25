@@ -13,6 +13,6 @@
     "purescript-aff": ">=0.11.0",
     "purescript-random": ">=0.2.0",
     "purescript-quickcheck": ">=0.12.0",
-    "purescript-spec": "DavidHarrison/purescript-spec#3f31b44a3f3253d99e6eddbfc9afaa1fa294b156"
+    "purescript-spec": "DavidHarrison/purescript-spec#890f6c53534c407a80924f837e74fb217bfe51a1"
   }
 }

@@ -9,7 +9,7 @@ import Prelude
 import Control.Monad.Aff           (Aff())
 import Control.Monad.Eff.Exception (error)
 import Control.Monad.Eff.Class     (liftEff)
-import Control.Monad.Eff.Random    (RANDOM(), randomInt)
+import Control.Monad.Eff.Random    (RANDOM())
 import Control.Monad.Error.Class   (throwError)
 import Data.Foldable               (intercalate)
 import Data.List                   (mapMaybe, length)
