@@ -30,9 +30,9 @@ main = run [consoleReporter] do
       quickCheck \n -> ((n + 1) * 2) /== n
 ```
 
-## API
+## API Docs
 
-See [API](API.md).
+See [docs/Test/Spec/QuickCheck.md](docs/Test/Spec/QuickCheck.md).
 
 ## Contribute
 

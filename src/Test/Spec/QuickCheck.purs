@@ -6,16 +6,16 @@ module Test.Spec.QuickCheck (
 
 import Prelude
 
-import Control.Monad.Aff           (Aff())
+import Control.Monad.Aff           (Aff)
 import Control.Monad.Eff.Exception (error)
 import Control.Monad.Eff.Class     (liftEff)
-import Control.Monad.Eff.Random    (RANDOM(), randomInt)
+import Control.Monad.Eff.Random    (RANDOM)
 import Control.Monad.Error.Class   (throwError)
 import Data.Foldable               (intercalate)
 import Data.List                   (mapMaybe, length)
 import Data.Maybe                  (Maybe(..))
-import qualified Test.QuickCheck   as QC
-import Test.QuickCheck.LCG         (Seed(), randomSeed)
+import Test.QuickCheck             as QC
+import Test.QuickCheck.LCG         (Seed, randomSeed)
 
 -- | Runs a Testable with a random seed and 100 inputs.
 quickCheck :: forall r p e.
@@ -51,4 +51,4 @@ quickCheckPure seed n prop = do
 
   if length msgs > 0
     then throwError $ error $ intercalate "\n  " msgs
-    else return unit
+    else pure unit
