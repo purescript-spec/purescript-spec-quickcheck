@@ -14,5 +14,10 @@
     "purescript-random": "^2.0.0",
     "purescript-quickcheck": "^3.0.0",
     "purescript-spec": "^0.12.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/owickstrom/purescript-spec-quickcheck.git"
   }
 }
