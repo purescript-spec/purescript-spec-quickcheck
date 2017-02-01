@@ -13,6 +13,6 @@
     "purescript-aff": "^2.0.1",
     "purescript-random": "^2.0.0",
     "purescript-quickcheck": "^3.0.0",
-    "purescript-spec": "^0.10.0"
+    "purescript-spec": "^0.12.0"
   }
 }
