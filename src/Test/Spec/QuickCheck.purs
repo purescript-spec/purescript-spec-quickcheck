@@ -1,4 +1,5 @@
 module Test.Spec.QuickCheck (
+  QCRunnerEffects,
   quickCheck,
   quickCheck',
   quickCheckPure
@@ -16,6 +17,9 @@ import Data.List                   (mapMaybe, length)
 import Data.Maybe                  (Maybe(..))
 import Test.QuickCheck             as QC
 import Test.QuickCheck.LCG         (Seed, randomSeed)
+import Test.Spec.Runner            (RunnerEffects)
+
+type QCRunnerEffects e = RunnerEffects (random :: RANDOM | e)
 
 -- | Runs a Testable with a random seed and 100 inputs.
 quickCheck :: forall p e.
