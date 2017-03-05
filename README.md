@@ -32,7 +32,10 @@ main = run [consoleReporter] do
 
 ## API Docs
 
-See [docs/Test/Spec/QuickCheck.md](docs/Test/Spec/QuickCheck.md).
+This module is published, and has its API documentation, [on
+Pursuit](https://pursuit.purescript.org/packages/purescript-spec-quickcheck).
+For the full documentation on Purescript Spec, see [The
+Guide](http://purescript-spec.wickstrom.tech/).
 
 ## Contribute
 
