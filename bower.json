@@ -1,6 +1,5 @@
 {
   "name": "purescript-spec-quickcheck",
-  "version": "0.9.1",
   "ignore": [
     "**/.*",
     "bower_components",
