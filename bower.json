@@ -9,10 +9,10 @@
     "output"
   ],
   "dependencies": {
-    "purescript-aff": "^3.0.0",
+    "purescript-aff": "^4.0.0",
     "purescript-random": "^3.0.0",
-    "purescript-quickcheck": "^4.0.0",
-    "purescript-spec": "^1.0.0"
+    "purescript-quickcheck": "^4.6.0",
+    "purescript-spec": "^2.0.0"
   },
   "license": "MIT",
   "repository": {
