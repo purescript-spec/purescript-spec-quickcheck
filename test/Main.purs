@@ -1,14 +1,14 @@
 module Test.Main where
 
 import Prelude
-import Control.Monad.Eff (Eff)
+import Effect (Effect)
 import Test.QuickCheck ((===), (/==))
 import Test.Spec (describe, it)
-import Test.Spec.QuickCheck (QCRunnerEffects, quickCheck)
+import Test.Spec.QuickCheck (quickCheck)
 import Test.Spec.Reporter.Console (consoleReporter)
 import Test.Spec.Runner (run)
 
-main :: Eff (QCRunnerEffects ()) Unit
+main :: Effect Unit
 main = run [consoleReporter] do
   describe "Math" do
     it "works" $

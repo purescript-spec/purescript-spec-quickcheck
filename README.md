@@ -14,14 +14,14 @@ bower install purescript-spec-quickcheck
 module Test.Main where
 
 import Prelude
-import Control.Monad.Eff (Eff)
+import Effect (Effect)
 import Test.QuickCheck ((===), (/==))
 import Test.Spec (describe, it)
-import Test.Spec.QuickCheck (QCRunnerEffects, quickCheck)
+import Test.Spec.QuickCheck (quickCheck)
 import Test.Spec.Reporter.Console (consoleReporter)
 import Test.Spec.Runner (run)
 
-main :: Eff (QCRunnerEffects ()) Unit
+main :: Effect Unit
 main = run [consoleReporter] do
   describe "Math" do
     it "works" $
@@ -41,7 +41,7 @@ Guide](http://purescript-spec.wickstrom.tech/).
 
 If you have any issues or possible improvements please file them as
 [GitHub Issues](https://github.com/owickstrom/purescript-spec-quickcheck/issues).
-Pull requests requests are encouraged.
+Pull requests are encouraged.
 
 ## License
 

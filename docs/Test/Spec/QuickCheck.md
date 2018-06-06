@@ -3,7 +3,7 @@
 #### `quickCheck`
 
 ``` purescript
-quickCheck :: forall r p e. Testable p => p -> Aff (random :: RANDOM | e) Unit
+quickCheck :: forall p. Testable p => p -> Aff Unit
 ```
 
 Runs a Testable with a random seed and 100 inputs.
@@ -11,7 +11,7 @@ Runs a Testable with a random seed and 100 inputs.
 #### `quickCheck'`
 
 ``` purescript
-quickCheck' :: forall r p e. Testable p => Int -> p -> Aff (random :: RANDOM | e) Unit
+quickCheck' :: forall p. Testable p => Int -> p -> Aff Unit
 ```
 
 Runs a Testable with a random seed and the given number of inputs.
@@ -19,7 +19,7 @@ Runs a Testable with a random seed and the given number of inputs.
 #### `quickCheckPure`
 
 ``` purescript
-quickCheckPure :: forall r p e. Testable p => Seed -> Int -> p -> Aff e Unit
+quickCheckPure :: forall p e. Testable p => Seed -> Int -> p -> Aff Unit
 ```
 
 Runs a Testable with a given seed and number of inputs.
