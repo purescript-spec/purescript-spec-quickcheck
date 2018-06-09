@@ -1,5 +1,4 @@
 module Test.Spec.QuickCheck (
-  QCRunnerEffects,
   quickCheck,
   quickCheck',
   quickCheckPure
@@ -7,35 +6,31 @@ module Test.Spec.QuickCheck (
 
 import Prelude
 
-import Control.Monad.Aff           (Aff)
-import Control.Monad.Eff.Exception (error)
-import Control.Monad.Eff.Class     (liftEff)
-import Control.Monad.Eff.Random    (RANDOM)
-import Control.Monad.Error.Class   (throwError)
-import Data.Foldable               (intercalate)
-import Data.List                   (mapMaybe, length)
-import Data.Maybe                  (Maybe(..))
-import Test.QuickCheck             as QC
-import Test.QuickCheck.LCG         (Seed, randomSeed)
-import Test.Spec.Runner            (RunnerEffects)
-
-type QCRunnerEffects e = RunnerEffects (random :: RANDOM | e)
+import Control.Monad.Error.Class (throwError)
+import Data.Foldable             (intercalate)
+import Data.List                 (mapMaybe, length)
+import Data.Maybe                (Maybe(..))
+import Effect.Aff                (Aff)
+import Effect.Class              (liftEffect)
+import Effect.Exception          (error)
+import Random.LCG                (Seed, randomSeed)
+import Test.QuickCheck           as QC
 
 -- | Runs a Testable with a random seed and 100 inputs.
-quickCheck :: forall p e.
-              (QC.Testable p) =>
+quickCheck :: forall p.
+              QC.Testable p =>
               p ->
-              Aff (random :: RANDOM | e) Unit
+              Aff Unit
 quickCheck = quickCheck' 100
 
 -- | Runs a Testable with a random seed and the given number of inputs.
-quickCheck' :: forall p e.
-               (QC.Testable p) =>
+quickCheck' :: forall p.
+               QC.Testable p =>
                Int ->
                p ->
-               Aff (random :: RANDOM | e) Unit
+               Aff Unit
 quickCheck' n prop = do
-  seed <- liftEff randomSeed
+  seed <- liftEffect randomSeed
   quickCheckPure seed n prop
 
 getErrorMessage :: QC.Result -> Maybe String
@@ -43,12 +38,12 @@ getErrorMessage (QC.Failed msg) = Just msg
 getErrorMessage _ = Nothing
 
 -- | Runs a Testable with a given seed and number of inputs.
-quickCheckPure :: forall p e.
+quickCheckPure :: forall p.
                   (QC.Testable p) =>
                   Seed ->
                   Int ->
                   p ->
-                  Aff e Unit
+                  Aff Unit
 quickCheckPure seed n prop = do
   let results = QC.quickCheckPure seed n prop
   let msgs = mapMaybe getErrorMessage results
