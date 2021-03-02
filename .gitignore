@@ -1,5 +1,6 @@
 .psci
 .psci_modules/
+/.psc-ide-port
 bower_components/
 node_modules/
 output/
