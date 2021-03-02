@@ -9,15 +9,15 @@
     "output"
   ],
   "dependencies": {
-    "purescript-prelude": "^4.0.0",
-    "purescript-aff": "^5.0.0",
-    "purescript-random": "^4.0.0",
-    "purescript-quickcheck": "^5.0.0",
-    "purescript-spec": "^3.1.0"
+    "purescript-prelude": "^5.0.0",
+    "purescript-aff": "^6.0.0",
+    "purescript-random": "^5.0.0",
+    "purescript-quickcheck": "master",
+    "purescript-spec": "^5.0.0"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/owickstrom/purescript-spec-quickcheck.git"
+    "url": "https://github.com/owickstrom/purescript-spec-quickcheck.git"
   }
 }
