@@ -4,6 +4,9 @@
 bower_components/
 node_modules/
 output/
+.spago/
+.psc-ide-port
+.purs-repl
 tmp/
 /*.log
 tags
