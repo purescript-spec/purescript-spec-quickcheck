@@ -37,7 +37,7 @@ getErrorMessage (Tuple seed result) =
     QC.Success -> Nothing
     QC.Failed msg ->
       Just $
-        "Test failed for seed " <> show (QC.unSeed seed) <> ":\n" <> msg
+        "Test (seed " <> show (QC.unSeed seed) <> ") failed: \n" <> msg
 
 -- | Runs a Testable with a given seed and number of inputs.
 quickCheckPure :: forall p.
