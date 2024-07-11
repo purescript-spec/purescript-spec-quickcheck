@@ -6,50 +6,36 @@ module Test.Spec.QuickCheck (
 
 import Prelude
 
-import Effect.Class                (liftEffect)
-import Data.Foldable               (intercalate)
-import Data.List                   (mapMaybe, length)
-import Data.Maybe                  (Maybe(..))
-import Data.Tuple                  (Tuple(..))
-import Effect.Aff                  (Aff, error, throwError)
-import Test.QuickCheck             as QC
+import Data.Array (fold)
+import Data.Foldable (intercalate)
+import Data.List (mapMaybe, null)
+import Data.Maybe (Maybe(..))
+import Data.Tuple.Nested (type (/\), (/\))
+import Effect.Aff (Aff, error, throwError)
+import Effect.Class (liftEffect)
+import Test.QuickCheck as QC
 
 -- | Runs a Testable with a random seed and 100 inputs.
-quickCheck :: forall p.
-              (QC.Testable p) =>
-              p ->
-              Aff Unit
+quickCheck :: ∀ p. (QC.Testable p) => p -> Aff Unit
 quickCheck = quickCheck' 100
 
 -- | Runs a Testable with a random seed and the given number of inputs.
-quickCheck' :: forall p.
-               (QC.Testable p) =>
-               Int ->
-               p ->
-               Aff Unit
+quickCheck' :: ∀ p. (QC.Testable p) => Int -> p -> Aff Unit
 quickCheck' n prop = do
   seed <- liftEffect QC.randomSeed
   quickCheckPure seed n prop
 
-getErrorMessage :: Tuple QC.Seed QC.Result -> Maybe String
-getErrorMessage (Tuple seed result) =
-  case result of
-    QC.Success -> Nothing
-    QC.Failed msg ->
-      Just $
-        "Test (seed " <> show (QC.unSeed seed) <> ") failed: \n" <> msg
+getErrorMessage :: QC.Seed /\ QC.Result -> Maybe String
+getErrorMessage (_ /\ QC.Success) =
+  Nothing
+getErrorMessage (seed /\ QC.Failed msg) =
+  Just $ fold ["Test (seed ", show (QC.unSeed seed), ") failed: \n", msg]
 
 -- | Runs a Testable with a given seed and number of inputs.
-quickCheckPure :: forall p.
-                  (QC.Testable p) =>
-                  QC.Seed ->
-                  Int ->
-                  p ->
-                  Aff Unit
+quickCheckPure :: ∀ p. (QC.Testable p) => QC.Seed -> Int -> p -> Aff Unit
 quickCheckPure seed n prop = do
   let results = QC.quickCheckPure' seed n prop
   let msgs = mapMaybe getErrorMessage results
 
-  if length msgs > 0
-    then throwError $ error $ intercalate "\n  " msgs
-    else pure unit
+  unless (null msgs) $
+    throwError $ error $ intercalate "\n  " msgs
