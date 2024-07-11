@@ -10,6 +10,7 @@ import Effect.Class                (liftEffect)
 import Data.Foldable               (intercalate)
 import Data.List                   (mapMaybe, length)
 import Data.Maybe                  (Maybe(..))
+import Data.Tuple                  (Tuple(..))
 import Effect.Aff                  (Aff, error, throwError)
 import Test.QuickCheck             as QC
 
@@ -30,9 +31,13 @@ quickCheck' n prop = do
   seed <- liftEffect QC.randomSeed
   quickCheckPure seed n prop
 
-getErrorMessage :: QC.Result -> Maybe String
-getErrorMessage (QC.Failed msg) = Just msg
-getErrorMessage _ = Nothing
+getErrorMessage :: Tuple QC.Seed QC.Result -> Maybe String
+getErrorMessage (Tuple seed result) =
+  case result of
+    QC.Success -> Nothing
+    QC.Failed msg ->
+      Just $
+        "Test (seed " <> show (QC.unSeed seed) <> ") failed: \n" <> msg
 
 -- | Runs a Testable with a given seed and number of inputs.
 quickCheckPure :: forall p.
@@ -42,7 +47,7 @@ quickCheckPure :: forall p.
                   p ->
                   Aff Unit
 quickCheckPure seed n prop = do
-  let results = QC.quickCheckPure seed n prop
+  let results = QC.quickCheckPure' seed n prop
   let msgs = mapMaybe getErrorMessage results
 
   if length msgs > 0
