@@ -14,13 +14,5 @@ jobs:
       - name: Install & build
         run: npm install && npx spago build
 
-      - name: Cache PureScript dependencies
-        uses: actions/cache@v2
-        with:
-          key: ${{ runner.os }}-spago-${{ hashFiles('**/*.dhall') }}
-          path: |
-            .spago
-            output
-
       - name: Test
         run: npx spago test
